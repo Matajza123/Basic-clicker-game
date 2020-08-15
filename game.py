@@ -1,14 +1,15 @@
 import pygame
 import pygame_gui
 import random
-# from bottom_bar import BottomBar
-# from button import Button, TextButton
+
 from top_bar import TopBar
 from left_bar import LeftBar
 from board import Board
+from bottom_bar import BottomBar
 
 from player import Player
 from enemy import Enemy
+from heros import Hero
 from mods import Enemy_mod
 from stats import Stats
 
@@ -39,15 +40,16 @@ class Game():
         self.player = Player("Joseph")
         self.enemy = Enemy()
         self.stats = Stats()
-        self.mod = Enemy_mod()
-        # self.mod.get_
+        # self.mod = Enemy_mod() TODO
         
         self.top_bar = TopBar(400, 0)
-        self.left_bar = LeftBar(self.win, 0, 0)
+        self.left_bar = LeftBar(0, 0, self.player)
+        self.bottom_bar = BottomBar(400, 650, self.player)
         self.board = Board(400, 50)
 
 
     def next_lvl(self):
+        self.player.add_money(self.enemy.get_money())
         if self.board:
             del self.board
 
@@ -56,20 +58,17 @@ class Game():
 
         self.lvl += 1
         self.board = Board(400, 50)
-        self.enemy = Enemy(self.lvl)
+        self.enemy = Enemy(self.lvl, self.lvl)
 
-        self.player.add_money(1)
-
-        # print('-----------', 'self.player.get_money()', self.player.get_money()) 
-        
         pygame.display.update()
 
     def previous_lvl(self):
+        self.player.add_money(self.enemy.get_money())
         if self.enemy:
             del self.enemy
 
         self.lvl -= 1
-        self.enemy = Enemy(self.lvl)
+        self.enemy = Enemy(self.lvl, self.lvl)
         pygame.display.update()
         
     def draw_lvl(self):
@@ -77,16 +76,24 @@ class Game():
 
         self.board.draw(self.win, self.lvl, self.enemy.get_name(), self.enemy.get_img())
         self.top_bar.draw(self.win, self.enemy.get_hp(), self.enemy.get_max_hp(), self.enemy.get_ttk(), self.enemy.get_max_ttk())
-        self.left_bar.draw()
+        self.left_bar.draw(self.win)
+        self.bottom_bar.draw(self.win)
 
         pygame.display.update()
 
     def check_clicks(self):
         mouse = pygame.mouse.get_pos()
+        
         clicked_board = self.board.click(*mouse)
-
         if clicked_board:
             self.enemy.deal_dmg_click(self.player.get_click())
+            return True
+
+        clicked_left_bar = self.left_bar.click(*mouse)
+        if clicked_left_bar:
+            self.left_bar.buy_hero(mouse)
+            return True
+
 
     def run(self):
         clock = pygame.time.Clock()

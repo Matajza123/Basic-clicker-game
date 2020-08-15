@@ -2,8 +2,8 @@ class Player():
     def __init__(self, name):
         self.name = name
         self.click = 1
-        self.dps = 5
-        self.money = 0
+        self.dps = 0
+        self.money = 0.0
         self.items = {}
         self.skills = []
 
@@ -13,11 +13,16 @@ class Player():
     def add_dps(self, dps):
         self.dps += dps
 
+    def dec_dps(self, dps):
+        self.dps -= dps
+
     def add_money(self, money):
         self.money += money
 
-    def decrese_money(self, money):
-        self.money -= money
+    def dec_money(self, money):
+        new_money = self.money - money
+        if new_money > 0.0:
+            self.money -= money
 
     def append_item(self, item, dps):
         self.items[item] = dps

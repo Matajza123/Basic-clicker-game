@@ -2,8 +2,6 @@ import random
 import pygame
 import os
 
-from mods import Enemy_mod
-
 class Enemy():
     def __init__(self, id=1, lvl=1):
 
@@ -11,7 +9,8 @@ class Enemy():
         self.id = random.randrange(0, len(self.name))
         self.lvl = lvl
         self.boss = self.chech_if_boss(self.lvl)
-
+        self.prog = self.lvl*6.5
+        """
         if self.boss == "Small boss":
             self.mod = Enemy_mod("Small boss")
 
@@ -20,14 +19,15 @@ class Enemy():
 
         else:
             self.mod = Enemy_mod(False)
+        """
 
-        self.hp = mod.get_base_hp() + mod.get_hp() + mod.get_prog()
+        self.hp = 30 + self.prog
         self.max_hp = self.hp
 
-        self.lvl = self.lvl + mod.get_lvl() + mod.get_prog()
-        self.money = mod.get_money() + mod.get_prog()
+        self.lvl = 1
+        self.money = self.lvl*3.8
 
-        self.ttk = int(mod.get_base_ttk() - mod.get_ttk())
+        self.ttk = int(60-0.2)
         self.max_ttk = self.ttk
         
     def deal_dmg_click(self, click):
@@ -84,4 +84,3 @@ class Enemy():
     def get_img(self):
             # return pygame.image.load(os.path.join(f'img/enemy/Boss/{self.name[self.id]}.png'))
         return pygame.image.load(os.path.join(f'img/enemy/{self.name[self.id]}.png'))
-        

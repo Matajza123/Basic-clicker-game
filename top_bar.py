@@ -1,6 +1,4 @@
 import pygame
-from enemy import Enemy
-
 
 class TopBar(object):
     def __init__(self, x, y):

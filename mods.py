@@ -19,25 +19,25 @@ class Enemy_mod():
             print("normall")
             
     
-    def get_hp(self, hp):
+    def get_hp(self):
         return self.hp
 
-    def get_base_hp(self, base_hp):
+    def get_base_hp(self):
         return self.base_hp
     
-    def get_lvl(self, lvl):
+    def get_lvl(self):
         return self.lvl
     
-    def get_ttk(self, ttk):
+    def get_ttk(self):
         return self.ttk
 
-    def get_base_ttk(self, ttk):
+    def get_base_ttk(self):
         return self.base_ttk
     
-    def get_money(self, money):
+    def get_money(self):
         return self.money
 
-    def get_prog(self, prog):
+    def get_prog(self):
         return self.prog
 
     def change_hp(self, hp):

@@ -28,15 +28,15 @@ class Board(object):
     def draw(self, win, lvl, enemy_name, enemy_img):
         self.font = pygame.font.SysFont("arial.ttf", 75)
         self.font_name = pygame.font.SysFont("arial.ttf", 50)
-        win.blit(self.get_bg_img(), (400, 0))
 
         lvl_text = self.font.render(f'{lvl}', False, (255, 255, 255))
+        name = self.font_name.render(f'{enemy_name}', False, (255, 255, 255))
+        
+        win.blit(self.get_bg_img(), (400, 0))
+        win.blit(name, (650, 600))
         win.blit(lvl_text, (785, 80))
-
         win.blit(enemy_img, (650, 150))
 
-        name = self.font_name.render(f'{enemy_name}', False, (255, 255, 255))
-        win.blit(name, (650, 600))
 
     def get_bg_img(self):
         return pygame.image.load(os.path.join(f'img/bg/{self.bg_name[self.id]}.jpg'))# 750x675
