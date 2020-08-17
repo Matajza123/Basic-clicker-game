@@ -64,7 +64,6 @@ class LeftBar(object):
                 win.blit(hero_lvl,(260, self.y+(self.win_height*x)+35))
                 win.blit(lvl_cost,(260, self.y+(self.win_height*x)+55))
 
-
     def click(self, x, y):
         if 400 > x > 0 and 800 > y > 0:
             return True
@@ -73,10 +72,9 @@ class LeftBar(object):
         for hero in self.hero_list:
             if 370 > mouse[0] > 210:
                 if self.y+(self.win_height*hero.get_id())+87 > mouse[1] > self.y+(self.win_height*hero.get_id())+12:
-                    
                     hero_cost = hero.get_cost()
 
-                    if self.player.get_money() - hero_cost > 0.0:
+                    if self.player.get_money() - hero_cost >= 0.0:
                         if hero.get_status() == True:
                             self.player.dec_dps(hero.get_dps())
                             hero.add_lvl()

@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 import random
+import time
 
 from top_bar import TopBar
 from left_bar import LeftBar
@@ -47,6 +48,8 @@ class Game():
         self.bottom_bar = BottomBar(400, 650, self.player)
         self.board = Board(400, 50)
 
+        self.max_click_ps = 10
+
 
     def next_lvl(self):
         self.player.add_money(self.enemy.get_money())
@@ -67,7 +70,11 @@ class Game():
         if self.enemy:
             del self.enemy
 
-        self.lvl -= 1
+        if self.lvl <= 1:
+            self.lvl = 1
+        else:
+            self.lvl -= 1
+
         self.enemy = Enemy(self.lvl, self.lvl)
         pygame.display.update()
         
@@ -96,11 +103,13 @@ class Game():
 
 
     def run(self):
-        clock = pygame.time.Clock()
+        self.clock = pygame.time.Clock()
         clock_loop = 0
+        click_clock = 0
         is_running = True
 
         while is_running:
+            fps = self.clock.tick(30)
             button_pressed = False
 
             if self.enemy.get_hp() <= 0:
@@ -110,23 +119,24 @@ class Game():
                 self.previous_lvl()
 
             self.draw_lvl()
-
-            if clock_loop == 100:  # timer
+            
+            if clock_loop > 30:  # timer
                 self.enemy.decrese_ttk()
                 self.enemy.deal_dmg_dps(self.player.get_dps())
                 clock_loop = 0
             else:
                 clock_loop += 1
 
-            for event in pygame.event.get():
-                if button_pressed == False:
-                    if pygame.mouse.get_pressed()[0]:
-                        self.check_clicks()
-                        button_pressed = True
+            if click_clock > 1: 
+                if pygame.mouse.get_pressed()[0]:
+                    self.check_clicks()
+                    click_clock = 0
+            else:
+                click_clock += 1
 
+            for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     is_running = False
-
 
     
 if __name__ == "__main__":

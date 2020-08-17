@@ -3,7 +3,7 @@ class Player():
         self.name = name
         self.click = 1
         self.dps = 0
-        self.money = 0.0
+        self.money = 1000000.0
         self.items = {}
         self.skills = []
 
