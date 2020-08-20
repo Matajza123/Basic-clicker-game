@@ -1,23 +1,21 @@
 import pygame
 
 class Enemy_mod():
-    def __init__(self, type0=False, base_hp=10, hp=1, lvl=1, base_ttk=60, ttk=1, money=1, prog=6):
+    def __init__(self, type0=False, lvl=1, base_hp=30, hp=1, base_ttk=60, ttk=1, money=1, prog=1):
         self.type = type0
-        self.hp = hp
-        self.base_hp = base_hp
-        self.lvl = lvl
-        self.ttk = ttk
-        self.base_ttk = base_ttk
-        self.money = money
         self.prog = prog
+        self.lvl = lvl
+        print('-----------', 'self.prog', self.type) 
+        
+        if self.type == False: self.prog = self.lvl * 7
+        elif self.type  == True: self.prog = self.lvl * 10
+        elif self.type == "Boss": self.prog = self.lvl * 15
 
-        if self.type == "Boss":
-            print("boss")
-        elif self.type == "Small boss":
-            print("small boss")
-        else:
-            print("normall")
-            
+        self.base_hp = base_hp 
+        self.hp = base_hp * self.prog
+        self.ttk = ttk 
+        self.base_ttk = base_ttk
+        self.money = money + (self.lvl * self.prog)
     
     def get_hp(self):
         return self.hp
