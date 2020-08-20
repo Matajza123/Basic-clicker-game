@@ -1,31 +1,23 @@
 import random
 import pygame
 import os
-
+from mods import Enemy_mod
 class Enemy():
     def __init__(self, id=1, lvl=1):
 
         self.name = self.get_enemy_names()
         self.id = random.randrange(0, len(self.name))
         self.lvl = lvl
-        self.boss = self.chech_if_boss(self.lvl)
-        self.prog = self.lvl*6.5
-        """
-        if self.boss == "Small boss":
-            self.mod = Enemy_mod("Small boss")
 
-        elif self.boss == "Boss":
-            self.mod = Enemy_mod("Boss")
+        self.type = self.chech_if_boss(self.lvl)
+        self.mod = Enemy_mod(self.type, self.lvl)
 
-        else:
-            self.mod = Enemy_mod(False)
-        """
+        self.prog = self.mod.get_prog()
 
-        self.hp = 30 + self.prog
+        self.hp = self.mod.get_hp()
         self.max_hp = self.hp
 
-        self.lvl = 1
-        self.money = self.lvl*3.8
+        self.money = self.mod.get_money()
 
         self.ttk = int(60-0.2)
         self.max_ttk = self.ttk
@@ -62,14 +54,10 @@ class Enemy():
 
     def chech_if_boss(self, lvl):
         list_lvl = list(str(lvl))
-        if list_lvl[-1] == "0":
-            return "Boss"
 
-        elif list_lvl[-1] == "5":    
-            return "Small boss"
-
-        else:
-            return False
+        if list_lvl[-1] == "0": return "Boss"
+        elif list_lvl[-1] == "5": return True
+        else: return False
 
     def get_enemy_names(self):
         finall_names = []
@@ -82,5 +70,4 @@ class Enemy():
         return finall_names
         
     def get_img(self):
-            # return pygame.image.load(os.path.join(f'img/enemy/Boss/{self.name[self.id]}.png'))
         return pygame.image.load(os.path.join(f'img/enemy/{self.name[self.id]}.png'))
