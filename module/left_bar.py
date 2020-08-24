@@ -26,8 +26,6 @@ class LeftBar(object):
         self.WIDTH = 400
         self.HEIGHT = 800
         self.hero_list = [Hero(0, True), Hero(1)]
-        self.hero_loc = []
-        # self.hero_list = [Hero(0, True)]
 
     def draw(self, win):
         self.win_height = 100
@@ -36,9 +34,9 @@ class LeftBar(object):
             x = hero.get_id()
             hero_cost = hero.get_cost()
 
-            pygame.draw.rect(win, (255, 150, 0), (x, self.y+(self.win_height*x), self.WIDTH, self.win_height))
+            pygame.draw.rect(win, (255, 150, 0), (0, self.y+(self.win_height*x)-1, self.WIDTH, self.win_height))
             hero_name = self.font.render(f'{hero.get_name()} DPS{hero.get_dps()}', False, (255, 255, 255))
-            win.blit(hero_name,(self.x, self.y+(self.win_height*x)))
+            win.blit(hero_name,(0, self.y+(self.win_height*x)))
 
             if hero.get_status() == True:
                 if self.player.get_money() - hero_cost > 0.0:
