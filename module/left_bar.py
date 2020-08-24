@@ -81,7 +81,7 @@ class LeftBar(object):
                             self.player.add_dps(hero.get_dps())
 
                         elif hero.get_status() == False:
-                            if hero.get_id()+1 < 8:
+                            if hero.get_id() <=  len(hero.get_name_list()):
                                 hero.change_status()
                                 self.player.add_dps(hero.get_dps())
                                 self.hero_list.append(Hero(hero.get_id()+1))

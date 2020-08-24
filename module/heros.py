@@ -1,7 +1,7 @@
 import pygame
 
 class Hero(object):
-    name_list = ["Bob", "Joseph", "Alice", "Mathew", "Tom", "Tim", "Jeffrey", "Jow"]
+    name_list = ["Bob", "Joseph", "Alice", "Mathew", "Tom", "Tim", "Jeffrey", "Jow", "DO NOT TOUCH"]
     def __init__(self, id=1, bought=False):
         self.id = id
         self.name = self.name_list[self.id]
@@ -10,6 +10,9 @@ class Hero(object):
         self.dps = 1
         self.cost = self.id*38.8+10
         self.bought = bought
+
+    def get_name_list(self):
+        return self.name_list
         
     def get_id(self):
         return self.id
