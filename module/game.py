@@ -9,6 +9,7 @@ from board import Board
 from bottom_bar import BottomBar
 
 from player import Player
+from skills import Skills
 from enemy import Enemy
 from heros import Hero
 from mods import Enemy_mod
@@ -41,14 +42,14 @@ class Game():
         self.player = Player("Joseph")
         self.enemy = Enemy()
         self.stats = Stats()
-        # self.mod = Enemy_mod() TODO
+        self.skills = Skills()
         
         self.top_bar = TopBar(400, 0)
         self.left_bar = LeftBar(0, 0, self.player)
         self.bottom_bar = BottomBar(400, 650, self.player, self.stats)
         self.board = Board(400, 50)
 
-        self.max_click_ps = 10
+        self.max_click_ps = 10 # Max clicks per second
 
 
     def next_lvl(self):
@@ -87,6 +88,8 @@ class Game():
         self.top_bar.draw(self.win, self.enemy.get_hp(), self.enemy.get_max_hp(), self.enemy.get_ttk(), self.enemy.get_max_ttk())
         self.left_bar.draw(self.win)
         self.bottom_bar.draw(self.win)
+
+        self.skills.draw(self.win)
 
         pygame.display.update()
 

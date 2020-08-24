@@ -10,6 +10,7 @@ class Hero(object):
         self.dps = 1
         self.cost = self.id*38.8+10
         self.bought = bought
+        # self.skill = skills[self.id]
 
     def get_name_list(self):
         return self.name_list
@@ -37,7 +38,10 @@ class Hero(object):
 
     def get_status(self):
         return self.bought
-    
+
+    def get_skill(self):
+        return self.skill
+
     def add_dps(self, dps):
         if self.bought:
             self.dps += dps
@@ -71,4 +75,6 @@ class Hero(object):
         self.dps += self.lvl + self.prog + (self.id*1.6)
         self.add_prog(self.lvl*1.3)
         self.add_cost(10)
-        
+
+    def activate_skill(self):
+        pass

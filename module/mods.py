@@ -5,7 +5,6 @@ class Enemy_mod():
         self.type = type0
         self.prog = prog
         self.lvl = lvl
-        print('-----------', 'self.prog', self.type) 
         
         if self.type == False: self.prog = self.lvl * 7
         elif self.type  == True: self.prog = self.lvl * 10

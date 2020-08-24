@@ -34,7 +34,7 @@ class LeftBar(object):
             x = hero.get_id()
             hero_cost = hero.get_cost()
 
-            pygame.draw.rect(win, (255, 150, 0), (0, self.y+(self.win_height*x)-1, self.WIDTH, self.win_height))
+            pygame.draw.rect(win, (255, 150, 0), (0, self.y+(self.win_height*x), self.WIDTH, self.win_height))
             hero_name = self.font.render(f'{hero.get_name()} DPS{round(hero.get_dps())}', False, (255, 255, 255))
             win.blit(hero_name,(0, self.y+(self.win_height*x)))
 
