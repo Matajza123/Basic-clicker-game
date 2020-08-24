@@ -25,7 +25,7 @@ class TopBar(object):
         pygame.draw.rect(win, (0, 0, 0), (self.x+hp_percent0, self.y,
                                           self.width, self.height))
 
-        hp_text = self.font.render(f'{self.current_hp}/{self.max_hp} | {hp_percent2}%', False, (255, 255, 255))
+        hp_text = self.font.render(f'{round(self.current_hp)}/{self.max_hp} | {round(hp_percent2)}%', False, (255, 255, 255))
         win.blit(hp_text, (775, 30))
 
         

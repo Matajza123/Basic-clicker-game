@@ -23,9 +23,9 @@ class BottomBar:
 
     def draw(self, win):
         pygame.draw.rect(win, (255, 150, 0), (self.x, self.y, self.WIDTH, self.HEIGHT))
-        text_dps = self.font.render(f'Dps: {self.player.get_dps()}', False, (255, 255, 255))
-        text_clicks = self.font.render(f'Click dmg: {self.player.get_click()}', False, (255, 255, 255))
-        text_money = self.font.render(f'Money: {self.player.get_money()}', False, (255, 255, 255))
+        text_dps = self.font.render(f'Dps: {round(self.player.get_dps())}', False, (255, 255, 255))
+        text_clicks = self.font.render(f'Click dmg: {round(self.player.get_click())}', False, (255, 255, 255))
+        text_money = self.font.render(f'Money: {round(self.player.get_money())}', False, (255, 255, 255))
         text_skills = self.font.render(f'Skills: {self.player.get_skills()}', False, (255, 255, 255))
 
         win.blit(text_dps, (450, 675))

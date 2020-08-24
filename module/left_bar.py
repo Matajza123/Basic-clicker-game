@@ -35,7 +35,7 @@ class LeftBar(object):
             hero_cost = hero.get_cost()
 
             pygame.draw.rect(win, (255, 150, 0), (0, self.y+(self.win_height*x)-1, self.WIDTH, self.win_height))
-            hero_name = self.font.render(f'{hero.get_name()} DPS{hero.get_dps()}', False, (255, 255, 255))
+            hero_name = self.font.render(f'{hero.get_name()} DPS{round(hero.get_dps())}', False, (255, 255, 255))
             win.blit(hero_name,(0, self.y+(self.win_height*x)))
 
             if hero.get_status() == True:
@@ -45,7 +45,7 @@ class LeftBar(object):
                     pygame.draw.rect(win, (255, 0, 0), (210, self.y+(self.win_height*x)+12, 160, 75))
 
                 hero_lvl = self.font.render(f'LVL: {hero.get_lvl()}', False, (255, 255, 255))
-                lvl_cost = self.font.render(f'Cost: {hero.get_cost()}', False, (255, 255, 255))
+                lvl_cost = self.font.render(f'Cost: {round(hero.get_cost())}', False, (255, 255, 255))
 
                 win.blit(hero_lvl,(260, self.y+(self.win_height*x)+35))
                 win.blit(lvl_cost,(260, self.y+(self.win_height*x)+55))
@@ -57,7 +57,7 @@ class LeftBar(object):
                     pygame.draw.rect(win, (255, 0, 0), (210, self.y+(self.win_height*x)+12, 160, 75))
 
                 hero_lvl = self.font.render(f'LVL: 0', False, (255, 255, 255))
-                lvl_cost = self.font.render(f'Cost: {hero.get_cost()}', False, (255, 255, 255))
+                lvl_cost = self.font.render(f'Cost: {round(hero.get_cost())}', False, (255, 255, 255))
 
                 win.blit(hero_lvl,(260, self.y+(self.win_height*x)+35))
                 win.blit(lvl_cost,(260, self.y+(self.win_height*x)+55))
