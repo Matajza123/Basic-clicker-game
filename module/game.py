@@ -45,7 +45,7 @@ class Game():
         
         self.top_bar = TopBar(400, 0)
         self.left_bar = LeftBar(0, 0, self.player)
-        self.bottom_bar = BottomBar(400, 650, self.player)
+        self.bottom_bar = BottomBar(400, 650, self.player, self.stats)
         self.board = Board(400, 50)
 
         self.max_click_ps = 10
@@ -53,6 +53,8 @@ class Game():
 
     def next_lvl(self):
         self.player.add_money(self.enemy.get_money())
+        self.stats.update_enemy_count(self.enemy.chech_if_boss(self.lvl))
+
         if self.board:
             del self.board
 
